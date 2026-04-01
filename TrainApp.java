@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Comparator;
 import java.util.stream.Collectors;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 class Bogie {
     String name;
@@ -121,5 +123,17 @@ public class TrainApp {
                 .reduce(0, Integer::sum);
 
         System.out.println("Total Seating Capacity: " + totalSeats);
+
+        String trainId = "TRN-1234";
+        String cargoCode = "PET-AB";
+
+        Pattern trainPattern = Pattern.compile("TRN-\\d{4}");
+        Pattern cargoPattern = Pattern.compile("PET-[A-Z]{2}");
+
+        Matcher trainMatcher = trainPattern.matcher(trainId);
+        Matcher cargoMatcher = cargoPattern.matcher(cargoCode);
+
+        System.out.println("Train ID Valid: " + trainMatcher.matches());
+        System.out.println("Cargo Code Valid: " + cargoMatcher.matches());
     }
 }
