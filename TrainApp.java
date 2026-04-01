@@ -6,6 +6,21 @@ import java.util.LinkedList;
 import java.util.LinkedHashSet;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Comparator;
+
+class Bogie {
+    String name;
+    int capacity;
+
+    Bogie(String name, int capacity) {
+        this.name = name;
+        this.capacity = capacity;
+    }
+
+    public String toString() {
+        return name + " -> " + capacity;
+    }
+}
 
 public class TrainApp {
     public static void main(String[] args) {
@@ -68,6 +83,18 @@ public class TrainApp {
         System.out.println("Bogie Capacity Details:");
         for (Map.Entry<String, Integer> entry : bogieCapacity.entrySet()) {
             System.out.println(entry.getKey() + " -> " + entry.getValue());
+        }
+
+        List<Bogie> bogieList = new ArrayList<>();
+        bogieList.add(new Bogie("Sleeper", 72));
+        bogieList.add(new Bogie("AC Chair", 60));
+        bogieList.add(new Bogie("First Class", 24));
+
+        bogieList.sort(Comparator.comparingInt(b -> b.capacity));
+
+        System.out.println("Sorted Bogies by Capacity:");
+        for (Bogie b : bogieList) {
+            System.out.println(b);
         }
     }
 }
