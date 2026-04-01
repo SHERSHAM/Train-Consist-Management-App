@@ -25,6 +25,16 @@ class Bogie {
     }
 }
 
+class GoodsBogie {
+    String type;
+    String cargo;
+
+    GoodsBogie(String type, String cargo) {
+        this.type = type;
+        this.cargo = cargo;
+    }
+}
+
 public class TrainApp {
     public static void main(String[] args) {
 
@@ -135,5 +145,15 @@ public class TrainApp {
 
         System.out.println("Train ID Valid: " + trainMatcher.matches());
         System.out.println("Cargo Code Valid: " + cargoMatcher.matches());
+
+        List<GoodsBogie> goodsList = new ArrayList<>();
+        goodsList.add(new GoodsBogie("Cylindrical", "Petroleum"));
+        goodsList.add(new GoodsBogie("Box", "Coal"));
+        goodsList.add(new GoodsBogie("Open", "Grain"));
+
+        boolean isSafe = goodsList.stream()
+                .allMatch(g -> !g.type.equals("Cylindrical") || g.cargo.equals("Petroleum"));
+
+        System.out.println("Safety Compliance: " + isSafe);
     }
 }
