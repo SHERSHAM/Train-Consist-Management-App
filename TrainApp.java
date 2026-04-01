@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.LinkedList;
+import java.util.LinkedHashSet;
 
 public class TrainApp {
     public static void main(String[] args) {
@@ -35,7 +36,6 @@ public class TrainApp {
         System.out.println("Final bogie list: " + passengerBogies);
 
         LinkedList<String> trainConsist = new LinkedList<>();
-
         trainConsist.add("Engine");
         trainConsist.add("Sleeper");
         trainConsist.add("AC");
@@ -48,5 +48,14 @@ public class TrainApp {
         trainConsist.removeLast();
 
         System.out.println("Final Train Consist: " + trainConsist);
+
+        LinkedHashSet<String> formation = new LinkedHashSet<>();
+        formation.add("Engine");
+        formation.add("Sleeper");
+        formation.add("Cargo");
+        formation.add("Guard");
+        formation.add("Sleeper");
+
+        System.out.println("Final Formation (Ordered & Unique): " + formation);
     }
 }
