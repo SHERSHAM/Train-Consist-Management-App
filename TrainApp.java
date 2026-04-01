@@ -11,6 +11,29 @@ import java.util.stream.Collectors;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
+class InvalidCapacityException extends Exception {
+    public InvalidCapacityException(String message) {
+        super(message);
+    }
+}
+
+class PassengerBogie {
+    String name;
+    int capacity;
+
+    PassengerBogie(String name, int capacity) throws InvalidCapacityException {
+        if (capacity <= 0) {
+            throw new InvalidCapacityException("Capacity must be greater than zero");
+        }
+        this.name = name;
+        this.capacity = capacity;
+    }
+
+    public String toString() {
+        return name + " -> " + capacity;
+    }
+}
+
 class Bogie {
     String name;
     int capacity;
@@ -182,5 +205,17 @@ public class TrainApp {
 
         System.out.println("Loop Result Size: " + loopFiltered.size());
         System.out.println("Stream Result Size: " + streamFiltered.size());
+
+        try {
+            PassengerBogie bogie1 = new PassengerBogie("Sleeper", 72);
+            PassengerBogie bogie2 = new PassengerBogie("AC Chair", 60);
+            PassengerBogie bogie3 = new PassengerBogie("Invalid", 0);
+
+            System.out.println(bogie1);
+            System.out.println(bogie2);
+            System.out.println(bogie3);
+        } catch (InvalidCapacityException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 }
