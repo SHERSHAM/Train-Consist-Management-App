@@ -7,6 +7,7 @@ import java.util.LinkedHashSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Comparator;
+import java.util.stream.Collectors;
 
 class Bogie {
     String name;
@@ -94,6 +95,15 @@ public class TrainApp {
 
         System.out.println("Sorted Bogies by Capacity:");
         for (Bogie b : bogieList) {
+            System.out.println(b);
+        }
+
+        List<Bogie> filteredBogies = bogieList.stream()
+                .filter(b -> b.capacity > 60)
+                .collect(Collectors.toList());
+
+        System.out.println("Filtered Bogies (Capacity > 60):");
+        for (Bogie b : filteredBogies) {
             System.out.println(b);
         }
     }
