@@ -156,7 +156,6 @@ public class TrainApp {
 
         System.out.println("Safety Compliance: " + isSafe);
 
-        // UC13 performance comparison: loop vs stream filtering
         long startLoop = System.nanoTime();
 
         List<Bogie> loopFiltered = new ArrayList<>();
