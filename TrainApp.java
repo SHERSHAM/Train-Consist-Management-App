@@ -155,5 +155,32 @@ public class TrainApp {
                 .allMatch(g -> !g.type.equals("Cylindrical") || g.cargo.equals("Petroleum"));
 
         System.out.println("Safety Compliance: " + isSafe);
+
+        long startLoop = System.nanoTime();
+
+        List<Bogie> loopFiltered = new ArrayList<>();
+        for (Bogie b : bogieList) {
+            if (b.capacity > 60) {
+                loopFiltered.add(b);
+            }
+        }
+
+        long endLoop = System.nanoTime();
+        long loopTime = endLoop - startLoop;
+
+        long startStream = System.nanoTime();
+
+        List<Bogie> streamFiltered = bogieList.stream()
+                .filter(b -> b.capacity > 60)
+                .collect(Collectors.toList());
+
+        long endStream = System.nanoTime();
+        long streamTime = endStream - startStream;
+
+        System.out.println("Loop Filtering Time: " + loopTime + " ns");
+        System.out.println("Stream Filtering Time: " + streamTime + " ns");
+
+        System.out.println("Loop Result Size: " + loopFiltered.size());
+        System.out.println("Stream Result Size: " + streamFiltered.size());
     }
 }
