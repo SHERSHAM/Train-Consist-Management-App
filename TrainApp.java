@@ -90,6 +90,7 @@ public class TrainApp {
         bogieList.add(new Bogie("Sleeper", 72));
         bogieList.add(new Bogie("AC Chair", 60));
         bogieList.add(new Bogie("First Class", 24));
+        bogieList.add(new Bogie("Sleeper", 72));
 
         bogieList.sort(Comparator.comparingInt(b -> b.capacity));
 
@@ -105,6 +106,14 @@ public class TrainApp {
         System.out.println("Filtered Bogies (Capacity > 60):");
         for (Bogie b : filteredBogies) {
             System.out.println(b);
+        }
+
+        Map<String, List<Bogie>> grouped = bogieList.stream()
+                .collect(Collectors.groupingBy(b -> b.name));
+
+        System.out.println("Grouped Bogies:");
+        for (Map.Entry<String, List<Bogie>> entry : grouped.entrySet()) {
+            System.out.println(entry.getKey() + " -> " + entry.getValue());
         }
     }
 }
