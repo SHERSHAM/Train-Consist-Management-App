@@ -333,6 +333,130 @@ public class TrainApp {
         System.out.println("Worst case: O(n) - element found at last position or not found");
         System.out.println("Works on unsorted data: No preprocessing required");
         System.out.println("Simple and reliable: Easy to implement and understand");
+
+        System.out.println("\n--- UC19 Binary Search for Bogie ID (Optimized Searching) ---");
+
+        String[] sortedBogieIds = {"BG101", "BG205", "BG309", "BG412", "BG550"};
+        System.out.println("\nSorted Bogie IDs: " + Arrays.toString(sortedBogieIds));
+
+        String binarySearchKey = "BG309";
+        System.out.println("Binary searching for bogie ID: " + binarySearchKey);
+
+        boolean binaryFound = false;
+        int binaryPosition = -1;
+        int low = 0;
+        int high = sortedBogieIds.length - 1;
+        int iterations = 0;
+
+        while (low <= high) {
+            iterations++;
+            int mid = low + (high - low) / 2;
+            int comparison = binarySearchKey.compareTo(sortedBogieIds[mid]);
+
+            System.out.println("Iteration " + iterations + ": low=" + low + ", high=" + high + ", mid=" + mid +
+                ", mid_value='" + sortedBogieIds[mid] + "', comparison=" + comparison);
+
+            if (comparison == 0) {
+                binaryFound = true;
+                binaryPosition = mid;
+                break;
+            } else if (comparison < 0) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+
+        if (binaryFound) {
+            System.out.println("✓ Bogie ID '" + binarySearchKey + "' found at position " + binaryPosition +
+                " (took " + iterations + " iterations)");
+        } else {
+            System.out.println("✗ Bogie ID '" + binarySearchKey + "' not found (took " + iterations + " iterations)");
+        }
+
+        System.out.println("\n--- UC19 Additional Binary Search Examples ---");
+
+        String[] binarySearchKeys = {"BG999", "BG101", "BG550", "BG205", "BG412"};
+        for (String key : binarySearchKeys) {
+            boolean keyFound = false;
+            int keyPosition = -1;
+            int keyLow = 0;
+            int keyHigh = sortedBogieIds.length - 1;
+            int keyIterations = 0;
+
+            while (keyLow <= keyHigh) {
+                keyIterations++;
+                int mid = keyLow + (keyHigh - keyLow) / 2;
+                int comparison = key.compareTo(sortedBogieIds[mid]);
+
+                if (comparison == 0) {
+                    keyFound = true;
+                    keyPosition = mid;
+                    break;
+                } else if (comparison < 0) {
+                    keyHigh = mid - 1;
+                } else {
+                    keyLow = mid + 1;
+                }
+            }
+
+            System.out.println("Binary search for '" + key + "': " +
+                (keyFound ? "Found at position " + keyPosition + " (" + keyIterations + " iterations)" :
+                 "Not found (" + keyIterations + " iterations)"));
+        }
+
+        System.out.println("\n--- UC19 Edge Cases ---");
+
+        String[] singleElement = {"BG101"};
+        String binarySingleSearch = "BG101";
+        boolean binarySingleFound = binarySearch(singleElement, binarySingleSearch);
+        System.out.println("Single element search for '" + binarySingleSearch + "' in " +
+            Arrays.toString(singleElement) + ": " + (binarySingleFound ? "Found" : "Not found"));
+
+        String[] emptyArray = {};
+        String binaryEmptySearch = "BG101";
+        boolean binaryEmptyFound = binarySearch(emptyArray, binaryEmptySearch);
+        System.out.println("Empty array search for '" + binaryEmptySearch + "' in " +
+            Arrays.toString(emptyArray) + ": " + (binaryEmptyFound ? "Found" : "Not found"));
+
+        String[] unsortedInput = {"BG309", "BG101", "BG550", "BG205", "BG412"};
+        System.out.println("\nUnsorted input: " + Arrays.toString(unsortedInput));
+        Arrays.sort(unsortedInput);
+        System.out.println("Sorted for binary search: " + Arrays.toString(unsortedInput));
+
+        String binaryUnsortedSearch = "BG205";
+        boolean binaryUnsortedFound = binarySearch(unsortedInput, binaryUnsortedSearch);
+        System.out.println("Binary search for '" + binaryUnsortedSearch + "' in sorted array: " +
+            (binaryUnsortedFound ? "Found" : "Not found"));
+
+        System.out.println("\n--- UC19 Performance Comparison ---");
+        System.out.println("Binary Search: O(log n) time complexity");
+        System.out.println("Linear Search: O(n) time complexity");
+        System.out.println("For n=1000 elements:");
+        System.out.println("  - Linear Search: ~1000 comparisons (worst case)");
+        System.out.println("  - Binary Search: ~10 comparisons (worst case)");
+        System.out.println("Efficiency gain: 100x faster for large datasets");
+        System.out.println("Precondition: Data must be sorted");
+        System.out.println("Divide-and-conquer: Search space halved each iteration");
+    }
+
+    private static boolean binarySearch(String[] arr, String key) {
+        int low = 0;
+        int high = arr.length - 1;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            int comparison = key.compareTo(arr[mid]);
+
+            if (comparison == 0) {
+                return true;
+            } else if (comparison < 0) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return false;
     }
 
     private static void safeAssignCargo(GoodsBogie bogie, String cargo) {
