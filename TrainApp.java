@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+﻿import java.util.ArrayList;
 import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
@@ -55,6 +55,15 @@ class GoodsBogie {
     GoodsBogie(String type, String cargo) {
         this.type = type;
         this.cargo = cargo;
+    }
+
+    GoodsBogie(String type) {
+        this(type, null);
+    }
+
+    @Override
+    public String toString() {
+        return type + " bogie carries " + (cargo == null ? "no cargo" : cargo);
     }
 }
 
@@ -216,6 +225,39 @@ public class TrainApp {
             System.out.println(bogie3);
         } catch (InvalidCapacityException e) {
             System.out.println("Error: " + e.getMessage());
+        }
+
+        System.out.println("\n--- UC15 Safe Cargo Assignment ---");
+
+        GoodsBogie rectangularBogie = new GoodsBogie("Rectangular");
+        GoodsBogie cylindricalBogie = new GoodsBogie("Cylindrical");
+
+        safeAssignCargo(rectangularBogie, "Petroleum");
+        safeAssignCargo(cylindricalBogie, "Petroleum");
+        safeAssignCargo(rectangularBogie, "Coal");
+
+        System.out.println("\nFinal bogie status:");
+        System.out.println(rectangularBogie);
+        System.out.println(cylindricalBogie);
+        System.out.println("\nProgram continued safely after exception handling.");
+    }
+
+    private static void safeAssignCargo(GoodsBogie bogie, String cargo) {
+        try {
+            System.out.println("\nAttempting to assign cargo: " + cargo + " to " + bogie.type + " bogie");
+            validateCargoAssignment(bogie.type, cargo);
+            bogie.cargo = cargo;
+            System.out.println("Cargo assigned successfully: " + bogie);
+        } catch (CargoSafetyException e) {
+            System.out.println("Unsafe cargo assignment detected: " + e.getMessage());
+        } finally {
+            System.out.println("Cargo assignment validation completed for " + bogie.type + " bogie.");
+        }
+    }
+
+    private static void validateCargoAssignment(String type, String cargo) {
+        if ("Rectangular".equalsIgnoreCase(type) && "Petroleum".equalsIgnoreCase(cargo)) {
+            throw new CargoSafetyException("Petroleum cannot be assigned to a Rectangular bogie.");
         }
     }
 }
