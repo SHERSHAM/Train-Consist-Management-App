@@ -84,8 +84,7 @@ public class UC15Test {
         
         GoodsBogie bogie1 = new GoodsBogie("Rectangular");
         GoodsBogie bogie2 = new GoodsBogie("Cylindrical");
-        
-        // First attempt - should fail
+     
         try {
             validateCargoAssignment("Rectangular", "Petroleum");
         } catch (CargoSafetyException e) {
@@ -94,7 +93,7 @@ public class UC15Test {
             System.out.println("Cleanup for first assignment");
         }
         
-        // Second attempt - should succeed, proving program continues
+
         try {
             validateCargoAssignment("Cylindrical", "Petroleum");
             bogie2.setCargo("Petroleum");
@@ -115,17 +114,17 @@ public class UC15Test {
         System.out.println("Test Case 5: Finally Block Execution");
         int finallyExecutionCount = 0;
         
-        // Test 1: Success case
+
         try {
             validateCargoAssignment("Cylindrical", "Petroleum");
             finallyExecutionCount++;
         } catch (CargoSafetyException e) {
-            // Not expected
+         
         } finally {
             System.out.println("✓ Finally block executed for successful assignment");
         }
         
-        // Test 2: Failure case
+  
         try {
             validateCargoAssignment("Rectangular", "Petroleum");
         } catch (CargoSafetyException e) {
