@@ -1,4 +1,4 @@
-# TEST CASE CREATION & EXECUTION IN INTELLIJ (JAVA PROJECT)
+# TEST CASE CREATION & EXECUTION IN VS CODE (JAVA PROJECT)
 
 ## 1. WHAT IS A TEST CASE?
 
@@ -22,7 +22,7 @@ If not → Test Failed ❌
 - ✅ To ensure code quality and reliability
 - ✅ To document expected behavior
 
-## 3. WHERE TO WRITE TEST CASES IN INTELLIJ?
+## 3. WHERE TO WRITE TEST CASES IN VS CODE?
 
 ### Project Structure:
 ```
@@ -34,30 +34,31 @@ src
 ```
 
 ### If 'test' folder is not present:
-1. Right-click on **Project Name** in Project Explorer
-2. Click **New** → **Directory**
+1. Right-click in the Explorer panel
+2. Click **New Folder**
 3. Name it `test`
-4. Right-click on `test` folder → **Mark Directory as** → **Test Sources Root**
+4. Inside `test`, create `java` folder
+5. Right-click on `test/java` → **Mark Directory as Test Sources** (if using Java extension)
 
 ## 4. HOW TO CREATE A TEST CASE FILE:
 
 ### Method 1: Generate Test for Existing Class
 1. Open your main class (e.g., `TrainApp.java`)
-2. Right-click inside the class
-3. Select **Generate** → **Test** (shortcut: `Alt + Insert` / `⌘ + N` on Mac)
+2. Use Command Palette (Ctrl+Shift+P) → "Java: Generate Tests"
 
 ### Method 2: Create Test Class Manually
 1. Right-click on `test/java` folder
-2. Click **New** → **Java Class**
-3. Name it `YourClassNameTest` (e.g., `TrainAppTest`)
+2. Click **New File**
+3. Name it `YourClassNameTest.java` (e.g., `TrainAppTest.java`)
 4. Add JUnit imports and annotations
 
 ### JUnit Library Setup
-If IntelliJ shows a "Fix" option (missing JUnit library):
-- Click **Fix** → Click **OK** to add JUnit dependency
-- Choose JUnit 5 (Jupiter) for modern projects
-- Select test methods to generate
-- Click **OK**
+If VS Code shows missing JUnit:
+- Ensure Java Extension Pack is installed
+- Add JUnit dependency to your `pom.xml` or `build.gradle`
+- For Maven: Add to dependencies
+- For Gradle: Add to dependencies block
+- Reload the project
 
 ## 5. UNDERSTANDING THE TEST CODE
 
@@ -100,30 +101,30 @@ public class TrainAppTest {
 ## 6. HOW TO RUN TEST CASES
 
 ### Method 1: Run Single Test
-- Click the green ▶️ play icon near the test method
-- Click **Run** 'testMethodName()'
+- Open the test file
+- Click the ▶️ icon next to the test method in the Test Explorer
+- Or use Command Palette: "Java: Run Test"
 
 ### Method 2: Run Entire Test Class
-- Right-click on test class name
-- Click **Run** 'ClassNameTest'
+- Open the Test Explorer (Ctrl+Shift+T)
+- Right-click on the test class
+- Click **Run Tests**
 
 ### Method 3: Run All Tests in Project
-- Right-click on project root
-- Click **Run** → **Run All Tests**
+- Open Test Explorer
+- Click **Run All Tests** button
 
-### Method 4: Using Run Configurations
-- Go to **Run** → **Edit Configurations**
-- Add new **JUnit** configuration
-- Select test class or package
-- Click **Run**
+### Method 4: Using Command Palette
+- Ctrl+Shift+P → "Java: Run All Tests"
+- Or "Java: Run Tests" for current file
 
 ## 7. HOW TO SEE RESULTS
 
-### Test Results Window:
-After running tests, IntelliJ shows:
+### Test Results in VS Code:
+After running tests:
 - 🟢 **Green** → Test Passed
 - 🔴 **Red** → Test Failed
-- **Test Results** tab appears
+- Results appear in the **Test Results** panel
 
 ### Results Details:
 - ✅ **Number of tests run**
@@ -133,10 +134,9 @@ After running tests, IntelliJ shows:
 - ✅ **Stack trace** for failures
 
 ### Coverage Reports:
-- Right-click on test class
-- Click **Run with Coverage**
-- View coverage percentage
-- See which lines are tested
+- Install "Coverage Gutters" extension
+- Run tests with coverage
+- View coverage in the editor
 
 ## 8. EXAMPLE OUTPUT
 
@@ -195,21 +195,21 @@ void shouldThrowException_WhenInputIsInvalid() {
 
 - ✅ **Test cases verify your code** works as expected
 - ✅ **Written using JUnit 5** (modern standard)
-- ✅ **Stored in 'test' folder** under test sources root
-- ✅ **Run using IntelliJ's Run options** (play button)
-- ✅ **Results shown instantly** in Test Results window
+- ✅ **Stored in 'test' folder** under test sources
+- ✅ **Run using VS Code's Test Explorer** or Command Palette
+- ✅ **Results shown in Test Results panel**
 - ✅ **Essential for professional Java development**
 
 ### Quick Reference:
-- **Create Test:** `Alt + Insert` → Test
-- **Run Test:** Click ▶️ or `Ctrl + Shift + F10`
-- **Run All Tests:** Right-click project → Run All Tests
-- **View Coverage:** Run with Coverage
+- **Create Test:** Command Palette (Ctrl+Shift+P) → "Java: Generate Tests"
+- **Run Test:** Click ▶️ in Test Explorer or Command Palette "Java: Run Test"
+- **Run All Tests:** Test Explorer → "Run All Tests" button
+- **View Coverage:** Install Coverage Gutters extension → Run with coverage
 
 ### Pro Tips:
-- Use **IntelliJ's test templates** for faster creation
-- **Debug tests** by clicking the debug button
-- **Use live templates** for common test patterns
+- Use **VS Code's Java test templates** for faster creation
+- **Debug tests** by clicking the debug icon in Test Explorer
+- **Use snippets** for common test patterns
 - **Integrate with CI/CD** for automated testing
 
 Happy Testing! 🚀
