@@ -1,4 +1,4 @@
-﻿import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,6 +10,7 @@ import java.util.Comparator;
 import java.util.stream.Collectors;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.Arrays;
 
 class InvalidCapacityException extends Exception {
     public InvalidCapacityException(String message) {
@@ -240,6 +241,32 @@ public class TrainApp {
         System.out.println(rectangularBogie);
         System.out.println(cylindricalBogie);
         System.out.println("\nProgram continued safely after exception handling.");
+
+        System.out.println("\n--- UC17 Sort Bogie Names Using Arrays.sort() ---");
+
+        String[] bogieTypes = {"Sleeper", "AC Chair", "First Class", "General", "Luxury"};
+        System.out.println("\nOriginal Bogie Names: " + Arrays.toString(bogieTypes));
+
+        Arrays.sort(bogieTypes);
+        System.out.println("Sorted Bogie Names: " + Arrays.toString(bogieTypes));
+
+        System.out.println("\n--- UC17 Additional Sorting Examples ---");
+
+        String[] unsortedBogies = {"Luxury", "General", "Sleeper", "AC Chair"};
+        System.out.println("\nUnsorted Bogies: " + Arrays.toString(unsortedBogies));
+        Arrays.sort(unsortedBogies);
+        System.out.println("Sorted Bogies: " + Arrays.toString(unsortedBogies));
+
+        String[] duplicateBogies = {"Sleeper", "AC Chair", "Sleeper", "General"};
+        System.out.println("\nBogie Names with Duplicates: " + Arrays.toString(duplicateBogies));
+        Arrays.sort(duplicateBogies);
+        System.out.println("Sorted (Duplicates Preserved): " + Arrays.toString(duplicateBogies));
+
+        System.out.println("\n--- UC17 Performance: Arrays.sort() vs Manual Sorting ---");
+        System.out.println("Arrays.sort() uses optimized dual-pivot quicksort/TimSort");
+        System.out.println("Time Complexity: O(n log n) - much faster than Bubble Sort O(n²)");
+        System.out.println("Library Benefit: Highly optimized, tested, and maintained");
+        System.out.println("Code Quality: Clean, readable, and production-ready");
     }
 
     private static void safeAssignCargo(GoodsBogie bogie, String cargo) {
