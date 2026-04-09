@@ -267,6 +267,72 @@ public class TrainApp {
         System.out.println("Time Complexity: O(n log n) - much faster than Bubble Sort O(n²)");
         System.out.println("Library Benefit: Highly optimized, tested, and maintained");
         System.out.println("Code Quality: Clean, readable, and production-ready");
+
+        System.out.println("\n--- UC18 Linear Search for Bogie ID (Array-Based Searching) ---");
+
+        String[] searchBogieIds = {"BG101", "BG205", "BG309", "BG412", "BG550"};
+        System.out.println("\nBogie IDs in consist: " + Arrays.toString(searchBogieIds));
+
+        String searchKey = "BG309";
+        System.out.println("Searching for bogie ID: " + searchKey);
+
+        boolean found = false;
+        int position = -1;
+
+        for (int i = 0; i < searchBogieIds.length; i++) {
+            if (searchBogieIds[i].equals(searchKey)) {
+                found = true;
+                position = i;
+                break;
+            }
+        }
+
+        if (found) {
+            System.out.println("✓ Bogie ID '" + searchKey + "' found at position " + position);
+        } else {
+            System.out.println("✗ Bogie ID '" + searchKey + "' not found in the consist");
+        }
+
+        System.out.println("\n--- UC18 Additional Search Examples ---");
+
+        String[] searchKeys = {"BG999", "BG101", "BG550", "BG205"};
+        for (String key : searchKeys) {
+            boolean keyFound = false;
+            int keyPosition = -1;
+
+            for (int i = 0; i < searchBogieIds.length; i++) {
+                if (searchBogieIds[i].equals(key)) {
+                    keyFound = true;
+                    keyPosition = i;
+                    break;
+                }
+            }
+
+            System.out.println("Searching for '" + key + "': " +
+                (keyFound ? "Found at position " + keyPosition : "Not found"));
+        }
+
+        System.out.println("\n--- UC18 Single Element Search ---");
+        String[] singleBogie = {"BG101"};
+        String singleSearch = "BG101";
+        boolean singleFound = false;
+
+        for (int i = 0; i < singleBogie.length; i++) {
+            if (singleBogie[i].equals(singleSearch)) {
+                singleFound = true;
+                break;
+            }
+        }
+
+        System.out.println("Single bogie search for '" + singleSearch + "': " +
+            (singleFound ? "Found" : "Not found"));
+
+        System.out.println("\n--- UC18 Performance Characteristics ---");
+        System.out.println("Linear Search: O(n) time complexity");
+        System.out.println("Best case: O(1) - element found at first position");
+        System.out.println("Worst case: O(n) - element found at last position or not found");
+        System.out.println("Works on unsorted data: No preprocessing required");
+        System.out.println("Simple and reliable: Easy to implement and understand");
     }
 
     private static void safeAssignCargo(GoodsBogie bogie, String cargo) {
